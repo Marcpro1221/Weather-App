@@ -1,0 +1,45 @@
+body{
+    overflow: hidden;
+    background-image: url('../asset/city.jpg');
+}
+
+main{
+    position: relative;
+    height: 100vh;
+}
+.main-section{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.current-weather{
+    color: black;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
+}
+table{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
+    border: 1px solid black;
+    border-collapse: collapse;
+   
+}
+th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 3%;
+}
+td > img{
+    height: 30px;
+}
