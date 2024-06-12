@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <section class="main-section">
+            <section class="weather">
+                <h1>Current Weather</h1>
+                <article class="weather-today">
+                    <div class="icon-and-weather">
+                        <img class="img-weather-icon" src="<%=imgIcon%>" alt="weather">
+                        <h2><%=data_Current_Weather%></h2>
+                    </div>
+                    <div class="weather-heading-info">
+                        <div class="temperature"><%=data_Temperature%>°C</div> 
+                        <div class="wind-speed">Wind Speed: <%=data_WindSpeed%>mph</div>
+                        <h3><%=data_City_Name%></h3>
+                    </div>
+                </article>
+                <article class="daily-forecast">
+                    <section class="days">
+                        <div>Today</div>
+                        <div class="temperature"><%=data_Temperature%>°C</div>
+                        <div><%=data_Current_Weather%></div>
+                    </section>
+                    <section class="days">
+                        <div>Tomorrow</div>
+                        <div class="temperature"><%=data_SubTemperature1%>°C</div>
+                        <div><%=data_current_SubWeather1%></div>
+                    </section>
+                    <section class="days">
+                        <div>Next Day</div>
+                        <div class="temperature"><%=data_SubTemperature2%>°C</div>
+                        <div><%=data_current_SubWeather2%></div>
+                    </section>
+                    <section class="days">
+                        <div>Next Day</div>
+                        <div class="temperature"><%=data_SubTemperature3%>°C</div>
+                        <div><%=data_current_SubWeather3%></div>
+                    </section>
+                    <section class="days">
+                        <div>Next Day</div>
+                        <div class="temperature"><%=data_SubTemperature4%>°C</div>
+                        <div><%=data_current_SubWeather4%></div>
+                    </section>
+                </article>
+                <article class="time-information">
+                    <div>
+                        <h2>Good Morning</h2>
+                        <h3>7:37AM</h3>
+                        <h4><%=data_Current_Weather%></h4>
+                        <div><%=data_Temperature%>°C</div> 
+                    </div>
+                    <div>
+                        <div><div><%= listOfHours.hours0 %>PM</div><div><%=hourlyTemperatures.hourlyTemp1%>°C</div></div>
+                        <div><div><%= listOfHours.hours1 %>PM</div><div><%=hourlyTemperatures.hourlyTemp2%>°C</div></div>
+                        <div><div><%= listOfHours.hours2 %>PM</div><div><%=hourlyTemperatures.hourlyTemp3%>°C</div></div>
+                        <div><div><%= listOfHours.hours3 %>PM</div><div><%=hourlyTemperatures.hourlyTemp4%>°C</div></div>
+                        <div><div><%= listOfHours.hours4 %>PM</div><div><%=hourlyTemperatures.hourlyTemp5%>°C</div></div>
+                    </div>
+                </article>
+            </section>
+        </section>
+    </main>
+    <script src="/javascript/index.js"></script>
+</body>
+</html>

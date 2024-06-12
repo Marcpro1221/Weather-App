@@ -6,40 +6,82 @@ body{
 main{
     position: relative;
     height: 100vh;
+    width:100%;
 }
 .main-section{
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     text-align: center;
+    width: 70%;
 }
-.current-weather{
+.weather{
     color: black;
     text-align: center;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
+    background-color: rgba(255, 255, 255, 0.7); /* Set the background color to be transparent */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
 }
-table{
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.5); /* Set the background color to be transparent */
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjust the alpha value here for the box shadow transparency */
-    border: 1px solid black;
-    border-collapse: collapse;
-   
+.temperature{
+    font-size: 2.5rem;
+    font-weight: bold;
 }
-th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 3%;
+.wind-speed{
+    font-size: 1rem;
+    font-weight: bold;  
 }
-td > img{
-    height: 30px;
+.img-weather-icon{
+    width: 100%;
+}
+.date-time{
+    font-size: 1rem;
+    font-weight: bold;
+}
+.weather-today{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    
+}
+.daily-forecast{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.icon-and-weather{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5%;
+    font-size: 0.8rem;
+}
+.weather-heading-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.days{
+    margin: 5%;
+}
+.days > .temperature{
+    font-size: 1.5rem;
+}
+.time-information > div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+.time-information > div:nth-child(2) div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
