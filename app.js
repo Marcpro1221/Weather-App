@@ -17,6 +17,20 @@ const hourlyURL = "http://api.weatherbit.io/v2.0/forecast/hourly?";
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+
+function getDayOfTheWeek(day){
+    let dateObject = new Date(day);
+    let listofDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let dayOfTheWeek = dateObject.getDay();
+    return listofDays[dayOfTheWeek];
+}
+function timeStamp(time){
+    let currentTime = new Date(time);
+    let options = { timeStyle: 'short', hour12: true };
+    let timeString = currentTime.toLocaleTimeString('en-US', options);
+    return timeString;
+}
+
 app.get('/', async (req,res)=>{
 
     try{
@@ -27,10 +41,6 @@ app.get('/', async (req,res)=>{
         const dataIcon = weatherData.data.data[0].weather.icon;
         const imgIcon = `https://cdn.weatherbit.io/static/img/icons/${dataIcon}.png`;
         
-        function timeStamp(time){
-            const timeStampString = new Date(time);
-            return timeStampString.getHours();
-        }
         const timeData = [
             hourlyData.data.data[0].timestamp_local,
             hourlyData.data.data[1].timestamp_local,
@@ -39,6 +49,10 @@ app.get('/', async (req,res)=>{
             hourlyData.data.data[4].timestamp_local
         ];
 
+        let time = new Date();
+        let options = { timeStyle: 'short', hour12: true };
+        let timeStrings = time.toLocaleTimeString('en-US', options);
+        
         const hours = timeData.map(timeStampString=>timeStamp(timeStampString));
         const listOfHours = {
             hours0:hours[0],
@@ -53,9 +67,14 @@ app.get('/', async (req,res)=>{
             hourlyTemp3:hourlyData.data.data[2].temp,
             hourlyTemp4:hourlyData.data.data[3].temp,
             hourlyTemp5:hourlyData.data.data[4].temp,
-
-        }
-       
+        }    
+        const daysOfTheWeek = {
+            day1:getDayOfTheWeek(dailyData.data.data[0].datetime),
+            day2:getDayOfTheWeek(dailyData.data.data[1].datetime),
+            day3:getDayOfTheWeek(dailyData.data.data[2].datetime),
+            day4:getDayOfTheWeek(dailyData.data.data[3].datetime),
+            day5:getDayOfTheWeek(dailyData.data.data[4].datetime),
+        }; 
         res.render('pages/index',
             {
                 imgIcon:imgIcon,
@@ -73,6 +92,8 @@ app.get('/', async (req,res)=>{
                 data_current_SubWeather4:dailyData.data.data[4].weather.description,
                 listOfHours:listOfHours,
                 hourlyTemperatures:hourlyTemperatures,
+                actualTime:timeStrings,
+                daysOfTheWeek:daysOfTheWeek,
             }
         );
     }catch(error){
@@ -85,9 +106,9 @@ app.listen(port,(req,res) =>{
 }); 
 
 /*
-1. change time to 12 hours format
-2. getDate() to get the actual time
-3. change goodmorning and goodevening according to the time.
+1.* change time to 12 hours format
+2.* getDate() to get the actual time
+3.* change goodmorning and goodevening according to the time.
 4. change heading to days of the week. //example: Monday, Tuesday, Wednesday etc. //
 5. responsive design and UI design.
 */
