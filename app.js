@@ -6,8 +6,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
+import * as dotenv from 'dotenv'
+dotenv.config();
 
-const API_Key = 'e6be8d62e5714d6fa8600c9167ab59af';
+const API_Key = 'e95fbbbe9e1f42faa855b13df00f9093';
 const app = express();
 const port = 3000;
 const URL = "http://api.weatherbit.io/v2.0/current?";
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-function getDayOfTheWeek(day){
+function getDayOfTheWeek(day){ 
     let dateObject = new Date(day);
     let listofDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     let dayOfTheWeek = dateObject.getDay();
@@ -34,9 +36,9 @@ function timeStamp(time){
 app.get('/', async (req,res)=>{
 
     try{
-        const weatherData = await axios.get(`${URL}lat=10.304445&lon=123.945883&key=${API_Key}`);
-        const dailyData = await axios.get(`${dailyURL}lat=10.304445&lon=123.945883&key=${API_Key}`);
-        const hourlyData = await axios.get(`${hourlyURL}lat=10.304445&lon=123.9&key=${API_Key}&hours=5`);
+        const weatherData = await axios.get(`${URL}lat=10.304445&lon=123.945883&key=${process.env.API_KEY}`);
+        const dailyData = await axios.get(`${dailyURL}lat=10.304445&lon=123.945883&key=${process.env.API_KEY}`);
+        const hourlyData = await axios.get(`${hourlyURL}lat=10.304445&lon=123.9&key=${process.env.API_KEY}&hours=5`);
         
         const dataIcon = weatherData.data.data[0].weather.icon;
         const imgIcon = `https://cdn.weatherbit.io/static/img/icons/${dataIcon}.png`;
@@ -74,7 +76,7 @@ app.get('/', async (req,res)=>{
             day3:getDayOfTheWeek(dailyData.data.data[2].datetime),
             day4:getDayOfTheWeek(dailyData.data.data[3].datetime),
             day5:getDayOfTheWeek(dailyData.data.data[4].datetime),
-        }; 
+        }
         res.render('pages/index',
             {
                 imgIcon:imgIcon,
@@ -94,8 +96,7 @@ app.get('/', async (req,res)=>{
                 hourlyTemperatures:hourlyTemperatures,
                 actualTime:timeStrings,
                 daysOfTheWeek:daysOfTheWeek,
-            }
-        );
+            });
     }catch(error){
         console.log(error);
         res.render('pages/index',{data:error});
